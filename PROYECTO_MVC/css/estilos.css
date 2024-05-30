@@ -1,0 +1,16 @@
+h1{
+    text-align: center;
+    color: blue;
+    font-size: italic;
+    background-color: yellow;
+}
+
+table{
+    border-radius: 2px;
+}
+
+td{
+    text-align: center;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-radius: 2px;
+}
