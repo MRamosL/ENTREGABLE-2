@@ -21,8 +21,8 @@ class profesorModel{
         return $this->profesores;
     }
 
-    public function insertProfesor($id, $name, $lastname, $edad, $salario, $areas){
-        $sql = "INSERT INTO Profesor (id, name, lastname, edad, salario, area) VALUES ('$id', '$name', '$lastname', '$edad', $salario, $area)";
+    public function insertProfesor($id, $name, $lastname, $edad, $salario, $area){
+        $sql = "INSERT INTO Empleados (id, name, lastname, edad, salario, area) VALUES ('$id', '$name', '$lastname', '$edad', $salario, $area)";
 
         if($this->db->query($sql)===TRUE){
             echo "New record created successfully";
