@@ -198,6 +198,16 @@
         });
     });
     </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('#btnEditar').click(function(){
+                alert("Click");
+                datos=$('#registroForm').serialize();
+
+                console.log(datos);
+        });
+    });
+    </script>
     <?php
         include 'db/db.php';
 
