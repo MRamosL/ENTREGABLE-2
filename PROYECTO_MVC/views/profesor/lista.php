@@ -41,9 +41,9 @@
         }
     </style>
 <body>
-    <h1>Lista de profesores</h1>
+    <h1>EMPRESA</h1>
     <div>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarRegistroModal">Agregar Profesor</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarRegistroModal">Agregado</button>
     </div><br>
     <table border="1" style="width: 100%;">
         <tr>
