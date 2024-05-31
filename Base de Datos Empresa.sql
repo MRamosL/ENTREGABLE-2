@@ -1,7 +1,6 @@
 -- Crear base de datos Empresa
 CREATE DATABASE Empresa;
 
--- Seleccionar la base de datos
 USE Empresa;
 
 -- Crear tabla Empleados
@@ -14,7 +13,6 @@ CREATE TABLE Empleados (
     area VARCHAR(50)
 );
 
--- Insertar datos en la tabla Empleados
 INSERT INTO Empleados (id, nombre, apellido, edad, salario_soles, area)
 VALUES 
     (1, 'Juan', 'Gómez', 30, 2500.00, 'Ventas'),
@@ -32,10 +30,10 @@ CREATE TABLE Dueño (
     cargo VARCHAR(50)
 );
 
--- Insertar datos en la tabla Dueño
 INSERT INTO Dueño (id, nombre, apellido, edad, salario_soles, cargo)
 VALUES 
     (1, 'Eduardo', 'Rodríguez', 45, 10000.00, 'CEO');
+
 
 -- Crear tabla Áreas
 CREATE TABLE Areas (
@@ -44,7 +42,6 @@ CREATE TABLE Areas (
     ubicacion VARCHAR(100)
 );
 
--- Insertar datos en la tabla Áreas
 INSERT INTO Areas (id, nombre, ubicacion)
 VALUES 
     (1, 'Ventas', 'Piso 1'),
@@ -58,10 +55,9 @@ CREATE TABLE Proyectos (
     nombre VARCHAR(100),
     descripcion TEXT,
     area_id INT,
-    FOREIGN KEY (area_id) REFERENCES Areas(id)
+    FOREIGN KEY (area_id) REFERENCES areas(id)
 );
 
--- Insertar datos en la tabla Proyectos
 INSERT INTO Proyectos (id, nombre, descripcion, area_id)
 VALUES 
     (1, 'Campaña de Marketing Digital', 'Lanzamiento de una nueva campaña en redes sociales', 2),
@@ -76,7 +72,6 @@ CREATE TABLE Clientes (
     ubicacion VARCHAR(100)
 );
 
--- Insertar datos en la tabla Clientes
 INSERT INTO Clientes (id, nombre, contacto, ubicacion)
 VALUES 
     (1, 'Compañía ABC', 'Juan Pérez', 'Av. 15 de Julio Mz. A Lt. 39 Zona A'),
@@ -89,7 +84,6 @@ CREATE TABLE InicioSesion (
     clave CHAR(4)
 );
 
--- Insertar datos en la tabla Inicio de Sesión
 INSERT INTO InicioSesion (correo, clave)
 VALUES 
     ('juan@example.com', '1234'),
