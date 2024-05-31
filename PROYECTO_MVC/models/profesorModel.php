@@ -10,7 +10,7 @@ class profesorModel{
     }
 
     public function getProfesores(){
-        $sql = "SELECT * FROM Profesor";
+        $sql = "SELECT * FROM Empleados";
 
         $result = $this->db->query($sql);
 
@@ -21,8 +21,8 @@ class profesorModel{
         return $this->profesores;
     }
 
-    public function insertProfesor($id, $name, $lastname, $job){
-        $sql = "INSERT INTO Profesor (id, name, lastname, job, enable) VALUES ('$id', '$name', '$lastname', '$job', 1)";
+    public function insertProfesor($id, $name, $lastname, $edad, $salario, $areas){
+        $sql = "INSERT INTO Profesor (id, name, lastname, edad, salario, area) VALUES ('$id', '$name', '$lastname', '$edad', $salario, $area)";
 
         if($this->db->query($sql)===TRUE){
             echo "New record created successfully";

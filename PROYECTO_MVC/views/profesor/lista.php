@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <title>.:Profesor:.</title>
+    <title>.:Empleados:.</title>
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
@@ -21,11 +21,20 @@
                     <a class="nav-link active" aria-current="page" href="index.php">Profesores</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="alumno.php">Alumnos</a>
+                    <a class="nav-link" href="empleados.php">Empleados</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="curso.php">Cursos</a>
+                    <a class="nav-link" href="dueño.php">Dueño</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="areas.php">Áreas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="proyecots.php">Proyectos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="clientes.php">Clientes</a>
+                </li>             
             </ul>
             <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -50,7 +59,9 @@
             <td>Id</td>
             <td>Name</td>
             <td>Lastname</td>
-            <td>Job</td>
+            <td>Edad</td>
+            <td>Salario</td>
+            <td>Áreas</td>
             <td colspan="2">Acción</td>
         </tr>
     <?php
@@ -60,7 +71,9 @@
                     <td>$row[id]</td>
                     <td>$row[name]</td>
                     <td>$row[lastname]</td>
-                    <td>$row[job]</td>
+                    <td>$row[edad]</td>
+                    <td>$row[salario]</td>
+                    <td>$row[areas]</td>
                     <td>
                     <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#editarRegistroModal'><img src='icons/pencil-solid.svg'></button>
                     </td>
@@ -87,27 +100,32 @@
                         <div class="form-group">
                             <label for="id">ID</label>
                             <input type="text" id="id" name="id" class="form-control" aria-describedby="idHelp">
-                            <small id="idHelp" class="form-text text-muted">Ingrese el id del profesor.</small>
+                            <small id="idHelp" class="form-text text-muted">Ingrese el id del empleado.</small>
                         </div>
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" aria-describedby="nombreHelp">
-                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del profesor.</small>
+                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del empleado.</small>
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
                             <input type="text" id="apellido" name="apellido" class="form-control" aria-describedby="apellidoHelp">
-                            <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido del profesor.</small>
+                            <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido del empleado.</small>
                         </div>
                         <div class="form-group">
-                            <label for="job">Job</label>
-                            <input type="text" id="job" name="job" class="form-control" aria-describedby="jobHelp">
-                            <small id="jobHelp" class="form-text text-muted">Ingrese el trabajo del profesor.</small>
+                            <label for="edad">Job</label>
+                            <input type="text" id="edad" name="edad" class="form-control" aria-describedby="edadHelp">
+                            <small id="edadHelp" class="form-text text-muted">Ingrese la edad del empleado.</small>
                         </div>
                         <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" class="form-control" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">Ingrese el correo electronico del profesor.</small>
+                            <label for="salario">Salario</label>
+                            <input type="salario" id="salario" name="salario" class="form-control" aria-describedby="salarioHelp">
+                            <small id="salarioHelp" class="form-text text-muted">Ingrese el salario del empleado.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Área</label>
+                            <input type="area" id="area" name="area" class="form-control" aria-describedby="areaHelp">
+                            <small id="areaHelp" class="form-text text-muted">Ingrese el área del empleado.</small>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -123,88 +141,47 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editarDatosModalLabel">Insertar nuevos registros</h5>
+                    <h5 class="modal-title" id="editarDatosModalLabel">Editar registros</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                         <!--<span aria-hidden="true">&times;</span>-->
                     </button>
                 </div>
-                <form action="index.php?page=insertar" method="POST" name="registroForm" id="registroForm" class="text-left">
+                <form action="index.php?page=editar" method="POST" name="registroForm" id="registroForm" class="text-left">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="id">ID</label>
                             <input type="text" id="id" name="id" class="form-control" aria-describedby="idHelp">
-                            <small id="idHelp" class="form-text text-muted">Ingrese el id del profesor.</small>
+                            <small id="idHelp" class="form-text text-muted">Ingrese el id del empleado.</small>
                         </div>
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" aria-describedby="nombreHelp">
-                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del profesor.</small>
+                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del empleado.</small>
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
                             <input type="text" id="apellido" name="apellido" class="form-control" aria-describedby="apellidoHelp">
-                            <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido del profesor.</small>
+                            <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido del empleado.</small>
                         </div>
                         <div class="form-group">
-                            <label for="job">Job</label>
-                            <input type="text" id="job" name="job" class="form-control" aria-describedby="jobHelp">
-                            <small id="jobHelp" class="form-text text-muted">Ingrese el trabajo del profesor.</small>
+                            <label for="edad">Job</label>
+                            <input type="text" id="edad" name="edad" class="form-control" aria-describedby="edadHelp">
+                            <small id="edadHelp" class="form-text text-muted">Ingrese la edad del empleado.</small>
                         </div>
                         <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" class="form-control" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">Ingrese el correo electronico del profesor.</small>
+                            <label for="salario">Salario</label>
+                            <input type="salario" id="salario" name="salario" class="form-control" aria-describedby="salarioHelp">
+                            <small id="salarioHelp" class="form-text text-muted">Ingrese el salario del empleado.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Área</label>
+                            <input type="area" id="area" name="area" class="form-control" aria-describedby="areaHelp">
+                            <small id="areaHelp" class="form-text text-muted">Ingrese el área del empleado.</small>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         <button type="button" id="btnEditar" name="btnEditar" class="btn btn-primary">Editar</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-        <!--Eliminar-->
-    <div class="modal fade" id="eliminarRegistroModal" tabindex="-1" role="dialog" aria-labelledby="eliminarDatosModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="eliminarDatosModalLabel">Insertar nuevos registros</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                        <!--<span aria-hidden="true">&times;</span>-->
-                    </button>
-                </div>
-                <form action="index.php?page=insertar" method="POST" name="registroForm" id="registroForm" class="text-left">
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label for="id">ID</label>
-                            <input type="text" id="id" name="id" class="form-control" aria-describedby="idHelp">
-                            <small id="idHelp" class="form-text text-muted">Ingrese el id del profesor.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="nombre">Nombre</label>
-                            <input type="text" id="nombre" name="nombre" class="form-control" aria-describedby="nombreHelp">
-                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del profesor.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="apellido">Apellido</label>
-                            <input type="text" id="apellido" name="apellido" class="form-control" aria-describedby="apellidoHelp">
-                            <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido del profesor.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="job">Job</label>
-                            <input type="text" id="job" name="job" class="form-control" aria-describedby="jobHelp">
-                            <small id="jobHelp" class="form-text text-muted">Ingrese el trabajo del profesor.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" class="form-control" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">Ingrese el correo electronico del profesor.</small>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="btnEliminar" name="btnEliminar" class="btn btn-primary">Eliminar</button>
                     </div>
                 </form>
             </div>
@@ -221,6 +198,24 @@
         });
     });
     </script>
+    <?php
+        include 'db/db.php';
 
+        // Verificar si se está enviando una solicitud POST para eliminar
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id'])) {
+            $id = $_POST['delete_id'];
+            $sql = "DELETE FROM Empleados WHERE id = $id";
+            if (mysqli_query($db, $sql)) {
+                echo "<script>alert('Curso eliminado exitosamente.'); window.location.href='';</script>";
+            } else {
+                $error = mysqli_error($db);
+                echo "<script>alert('Error al eliminar el Curso: $error');</script>";
+            }
+        }
+
+        // Obtener todos los profesores
+        $sql = "SELECT * FROM Empleados";
+        $result = mysqli_query($db, $sql);
+    ?>
 </body>
 </html>
