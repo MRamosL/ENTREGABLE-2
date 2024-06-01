@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
  <!-- Modal Agregar    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-   --> <title>.:Profesor:.</title>
+   --> <title>.:Dueños:.</title>
     <style>
         img {
             width: 16px;
@@ -48,7 +48,7 @@
         </div>
     </nav>
 
-    <h1>Lista Empleados</h1>
+    <h1>Lista Dueños </h1>
     <?php
     // Datos de la conexión
     $servername = "localhost";
@@ -208,10 +208,10 @@ $conn->close();
         $id = $_POST['delete_id_profesor'];
         $sql = "DELETE FROM Empleados WHERE id = $id";
         if (mysqli_query($db, $sql)) {
-            echo "<script>alert('Empleado eliminado exitosamente.'); window.location.href='';</script>";
+            echo "<script>alert('Dueño eliminado exitosamente.'); window.location.href='';</script>";
         } else {
             $error = mysqli_error($db);
-            echo "<script>alert('Error al eliminar el Empleado: $error');</script>";
+            echo "<script>alert('Error al eliminar el Dueño: $error');</script>";
         }
     }
 
