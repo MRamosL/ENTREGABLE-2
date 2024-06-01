@@ -66,7 +66,7 @@
     ?>
 
     <div>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarModal">Agregar Area</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarModal">Agregar Área</button>
     </div><br>
     <table border="1" style="width: 100%;">
         <tr>
@@ -157,7 +157,7 @@ $conn->close();
                 <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>              
             </div><br>
             <div class="form-group">
-                <label for="area">Ubicacion</label>
+                <label for="area">Ubicación</label>
                 <input type="text" name="ubicacion" id="ubicacion" class="form-control" placeholder="Ubicacion" required>              
             </div><br>
             <?php if (isset($_POST['insertar'])): ?>

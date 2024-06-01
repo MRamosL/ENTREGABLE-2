@@ -6,8 +6,9 @@
     <link rel="stylesheet" href="css/estilos.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
- <!-- Modal Agregar    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-   --> <title>.:Empleados:.</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <!-- Modal Agregar --> 
+    <title>.:Proyectos:.</title>
     <style>
         img {
             width: 16px;
@@ -72,15 +73,13 @@
         <tr>
             <td>Id</td>
             <td>Nombre</td>
-            <td>Apellido</td>
-            <td>Edad</td>
-            <td>Salario (Soles)</td>
-            <td>Área</td>
+            <td>Descripción</td>
+            <td>Id de Área</td>
             <td colspan="2">Acción</td>
         </tr>
         <?php
         // Consulta SQL para obtener los datos de la tabla Empleados
-        $sql = "SELECT id, nombre, apellido, edad, salario_soles, area FROM Empleados";
+        $sql = "SELECT id, nombre, descripcion, area_id FROM Proyectos";
         $result = $conn->query($sql);
 
         // Generar las filas de la tabla en HTML
@@ -90,10 +89,8 @@
                 <tr>
                     <td>{$row['id']}</td>
                     <td>{$row['nombre']}</td>
-                    <td>{$row['apellido']}</td>
-                    <td>{$row['edad']}</td>
-                    <td>{$row['salario_soles']}</td>
-                    <td>{$row['area']}</td>
+                    <td>{$row['descripcion']}</td>
+                    <td>{$row['area_id']}</td>
                     <td>
                         <button type='button' class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#editarRegistroModal'><img src='icons/pencil-solid.svg'></button>
                     </td>
@@ -122,15 +119,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['insertar'])) {
     // Obtén los datos del formulario de inserción
     $id = $_POST['id'];
     $nombre = $_POST['nombre'];
-    $apellido = $_POST['apellido'];
-    $edad = $_POST['edad'];
-    $salario = $_POST['salario'];
-    $area = $_POST['area'];
+    $descripcion = $_POST['descripcion'];
+    $area_id = $_POST['area_id'];
 
     // Inserta en la base de datos
-    $sql = "INSERT INTO Empleados (id, nombre, apellido, edad, salario, area) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO Empleados (id, nombre, descripcion, area_id) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("isssds", $id, $nombre, $apellido, $edad, $salario, $area);
+    $stmt->bind_param("isssds", $id, $nombre, $descripcion, $area_id);
 
     if ($stmt->execute()) {
         // Registro exitoso, asigna mensaje de éxito
@@ -165,20 +160,12 @@ $conn->close();
                 <input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" required>              
             </div><br>
             <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" name="apellido" id="apellido" class="form-control" placeholder="Apellido" required>              
+                <label for="descripcion ">Descripción</label>
+                <input type="text" name="descripcion" id="descripcion" class="form-control" placeholder="Descripcion" required>              
             </div><br>
             <div class="form-group">
-                <label for="edad">Edad</label>
-                <input type="number" name="edad" id="edad" class="form-control" placeholder="Edad" required>              
-            </div><br>
-            <div class="form-group">
-                <label for="salario">Salario</label>
-                <input type="number" step="0.01" name="salario" id="salario" class="form-control" placeholder="Salario" required>              
-            </div><br>
-            <div class="form-group">
-                <label for="area">Área</label>
-                <input type="text" name="area" id="area" class="form-control" placeholder="Área" required>              
+                <label for="area_id">Id de Área</label>
+                <input type="text" name="area_id" id="area_id" class="form-control" placeholder="Area_id" required>              
             </div><br>
             <?php if (isset($_POST['insertar'])): ?>
                 <?php if ($insertar_error_message): ?>
@@ -204,19 +191,19 @@ $conn->close();
     include 'db/db.php';
 
     // Verificar si se está enviando una solicitud POST para eliminarx
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id_empleados'])) {
-        $id = $_POST['delete_id_empleados'];
-        $sql = "DELETE FROM Empleados WHERE id = $id";
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id_proyectos'])) {
+        $id = $_POST['delete_id_proyectos'];
+        $sql = "DELETE FROM Proyectos WHERE id = $id";
         if (mysqli_query($db, $sql)) {
-            echo "<script>alert('Empleado eliminado exitosamente.'); window.location.href='';</script>";
+            echo "<script>alert('Proyecto eliminado exitosamente.'); window.location.href='';</script>";
         } else {
             $error = mysqli_error($db);
-            echo "<script>alert('Error al eliminar el Empleado: $error');</script>";
+            echo "<script>alert('Error al eliminar el Proyecto: $error');</script>";
         }
     }
 
     // Obtener todos los Empleados
-    $sql = "SELECT * FROM Empleados";
+    $sql = "SELECT * FROM Proyectos";
     $result = mysqli_query($db, $sql);
 ?>
 <!-- Modal para Eliminar Empleados -->
@@ -224,7 +211,7 @@ $conn->close();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalProfesorLabel">Estas seguro que deseas eliminar los datos del empleado</h5>
+                <h5 class="modal-title" id="modalProfesorLabel">Estas seguro que deseas eliminar los datos del Proyecto</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer">
@@ -260,32 +247,22 @@ $conn->close();
                         <div class="form-group">
                             <label for="id">ID</label>
                             <input type="text" id="id" name="id" class="form-control" aria-describedby="idHelp">
-                            <small id="idHelp" class="form-text text-muted">Ingrese el id del profesor.</small>
+                            <small id="idHelp" class="form-text text-muted">Ingrese el id del proyecto.</small>
                         </div>
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" aria-describedby="nombreHelp">
-                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del empleado.</small>
+                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del proyecto.</small>
                         </div>
                         <div class="form-group">
-                            <label for="apellido">Apellido</label>
-                            <input type="text" id="apellido" name="apellido" class="form-control" aria-describedby="apellidoHelp">
-                            <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido del empleado.</small>
+                            <label for="descripcion">Descripción</label>
+                            <input type="text" id="descripcion" name="descripcion" class="form-control" aria-describedby="descripcionHelp">
+                            <small id="descripcionHelp" class="form-text text-muted">Ingrese la descripción.</small>
                         </div>
                         <div class="form-group">
-                            <label for="edad">Edad</label>
-                            <input type="text" id="edad" name="edad" class="form-control" aria-describedby="edadHelp">
-                            <small id="edadHelp" class="form-text text-muted">Ingrese la edad del empleado.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="salario">Salario</label>
-                            <input type="text" id="salario" name="salario_soles" class="form-control" aria-describedby="salarioHelp">
-                            <small id="salarioHelp" class="form-text text-muted">Ingrese el salario del empleado.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="area">Área</label>
-                            <input type="text" id="area" name="area" class="form-control" aria-describedby="areaHelp">
-                            <small id="areaHelp" class="form-text text-muted">Ingrese el área del empleado.</small>
+                            <label for="area_id">Id de Área</label>
+                            <input type="text" id="area_id" name="area_id" class="form-control" aria-describedby="area_idHelp">
+                            <small id="areaHelp" class="form-text text-muted">Ingrese el id de área.</small>
                         </div>
                     </div>
                     <div class="modal-footer">
