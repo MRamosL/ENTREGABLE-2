@@ -31,7 +31,7 @@
                         <a class="nav-link" href="Empleados.php">Empleados</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="Areas.php">Areas</a>
+                        <a class="nav-link" href="Areas.php">Áreas</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="Proyectos.php">Proyectos</a>
@@ -66,7 +66,7 @@
     ?>
 
     <div>
-        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarModal">Agregar Profesor</button>
+        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insertarModal">Agregar Empleado</button>
     </div><br>
     <table border="1" style="width: 100%;">
         <tr>
@@ -204,8 +204,8 @@ $conn->close();
     include 'db/db.php';
 
     // Verificar si se está enviando una solicitud POST para eliminarx
-    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id_profesor'])) {
-        $id = $_POST['delete_id_profesor'];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['delete_id_empleados'])) {
+        $id = $_POST['delete_id_empleados'];
         $sql = "DELETE FROM Empleados WHERE id = $id";
         if (mysqli_query($db, $sql)) {
             echo "<script>alert('Empleado eliminado exitosamente.'); window.location.href='';</script>";
@@ -224,7 +224,7 @@ $conn->close();
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="modalProfesorLabel">Estas seguro que deseas eliminar los datos del profesor</h5>
+                <h5 class="modal-title" id="modalProfesorLabel">Estas seguro que deseas eliminar los datos del empleado</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-footer">
@@ -265,22 +265,27 @@ $conn->close();
                         <div class="form-group">
                             <label for="nombre">Nombre</label>
                             <input type="text" id="nombre" name="nombre" class="form-control" aria-describedby="nombreHelp">
-                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del profesor.</small>
+                            <small id="nombreHelp" class="form-text text-muted">Ingrese el nombre del empleado.</small>
                         </div>
                         <div class="form-group">
                             <label for="apellido">Apellido</label>
                             <input type="text" id="apellido" name="apellido" class="form-control" aria-describedby="apellidoHelp">
-                            <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido del profesor.</small>
+                            <small id="apellidoHelp" class="form-text text-muted">Ingrese el apellido del empleado.</small>
                         </div>
                         <div class="form-group">
-                            <label for="job">Job</label>
-                            <input type="text" id="job" name="job" class="form-control" aria-describedby="jobHelp">
-                            <small id="jobHelp" class="form-text text-muted">Ingrese el trabajo del profesor.</small>
+                            <label for="edad">Edad</label>
+                            <input type="text" id="edad" name="edad" class="form-control" aria-describedby="edadHelp">
+                            <small id="edadHelp" class="form-text text-muted">Ingrese la edad del empleado.</small>
                         </div>
                         <div class="form-group">
-                            <label for="email">E-mail</label>
-                            <input type="email" id="email" name="email" class="form-control" aria-describedby="emailHelp">
-                            <small id="emailHelp" class="form-text text-muted">Ingrese el correo electronico del profesor.</small>
+                            <label for="salario">Salario</label>
+                            <input type="text" id="salario" name="salario_soles" class="form-control" aria-describedby="salarioHelp">
+                            <small id="salarioHelp" class="form-text text-muted">Ingrese el salario del empleado.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="area">Área</label>
+                            <input type="text" id="area" name="area" class="form-control" aria-describedby="areaHelp">
+                            <small id="areaHelp" class="form-text text-muted">Ingrese el área del empleado.</small>
                         </div>
                     </div>
                     <div class="modal-footer">
