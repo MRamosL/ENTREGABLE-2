@@ -1,19 +1,11 @@
 <?php
-    class Conexion {  
-        public static function conectar(){
-            $server = "localhost";
-            $user = "root";
-            $password = "";
-            $db = "form_db";
-            $port = 3306;    
-    
-            $conexion = new mysqli(
-                $server, 
-                $user, 
-                $password, 
-                $db, 
-                $port
-            );
-            return $conexion;
-        }
+    $db = new mysqli("localhost", "root", "", "Empresa");
+    $db->set_charset("utf8");
+
+    if($db->connect_errno){
+        echo "Error | Connect to database MySQL";
+        exit();
     }
+
+    echo "Connection db succesfull";
+?>
